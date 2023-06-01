@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "3677075b-6f34-4700-85fd-7124ea60e926",
+		"name": "Books API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6032095",
+		"_collection_link": "https://lively-space-1203.postman.co/workspace/Lets-Bank~edee6706-16db-41bc-aca8-611c10c86dc5/collection/6032095-3677075b-6f34-4700-85fd-7124ea60e926?action=share&creator=6032095&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "authors",
+			"item": [
+				{
+					"name": "list authors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const result = pm.response.json();\r",
+									"const firstItem = pm.response.json().data[0];\r",
+									"\r",
+									"pm.test(\"On success - it should return status code 200\", () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"On success - it should return data on result\", () => {\r",
+									"    pm.expect(result.data).to.exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"On success - it should return first item on data result\", () => {\r",
+									"    pm.expect(firstItem).to.exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"On success - it should return id on first item on data result\", () => {\r",
+									"    pm.expect(firstItem.id).to.exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"On success - it should return id on first item on data result with 1 as value\", () => {\r",
+									"    pm.expect(firstItem.id).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"On success - it should return author on first item on data result\", () => {\r",
+									"    pm.expect(firstItem.author).to.exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"On success - it should return id on first item on data result with 'Luiz Gustavo Souza' as value\", () => {\r",
+									"    pm.expect(firstItem.author).to.equal(\"Luiz Gustavo Souza\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload authors",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/marco/Downloads/authors.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/authors/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"authors",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "list books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books?book=Desafio&edition=1&year=2023&author=Marco Almeida",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "book",
+									"value": "Desafio",
+									"description": "Filter books by it´s name using LIKE operator"
+								},
+								{
+									"key": "edition",
+									"value": "1",
+									"description": "Filter books by book edition"
+								},
+								{
+									"key": "year",
+									"value": "2023",
+									"description": "Filter books by publication year"
+								},
+								{
+									"key": "author",
+									"value": "Marco Almeida",
+									"description": "Filter books by author"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert books",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nome do livro novo\",\r\n    \"edition\": 1,\r\n    \"year\": 2023,\r\n    \"authors\": [\r\n        2,\r\n        3\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "book",
+									"value": "Desafio",
+									"disabled": true
+								},
+								{
+									"key": "edition",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update books",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Desafio Backend com Node.js e SQLite - Segunda Edição\",\r\n    \"edition\": 2,\r\n    \"year\": 2022,\r\n    \"authors\": [\r\n        1,\r\n        2\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/books/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books",
+								":id"
+							],
+							"query": [
+								{
+									"key": "book",
+									"value": "Desafio",
+									"disabled": true
+								},
+								{
+									"key": "edition",
+									"value": "2",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete books",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
