@@ -100,8 +100,6 @@ function update(id, book) {
 function validate(book) {
   let messages = [];
 
-  console.log(book);
-
   if (!book) {
     messages.push('No book is provided');
   }

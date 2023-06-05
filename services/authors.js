@@ -21,7 +21,7 @@ function upload(authors) {
     }
   }
 
-  return { message };
+  return { message }; 
 }
 
 function validate(authors) {

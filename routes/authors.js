@@ -5,7 +5,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 
 /* GET authors listing. */
-router.get('/', function (req, res, next) {
+router.get('/listAuthors', function (req, res, next) {
   try {
     res.json(authors.list());
   } catch (err) {
@@ -15,10 +15,10 @@ router.get('/', function (req, res, next) {
 });
 
 /* POST authors upload. */
-router.post('/upload', function (req, res, next) {
+router.post('/uploadAuthors', function (req, res, next) {
   const form = new formidable.IncomingForm();
-
   form.parse(req, function (err, fields, files) {
+    console.log("Logando->",files)
     if (err) {
       next(err);
       return;

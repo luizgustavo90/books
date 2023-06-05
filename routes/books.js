@@ -3,7 +3,7 @@ const router = express.Router();
 const books = require('../services/books');
 
 /* GET books listing. */
-router.get('/', function(req, res, next) {
+router.get('/listBooks', function(req, res, next) {
   try {
     res.json(books.list(req.query));
   } catch(err) {
@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST books */
-router.post('/', function(req, res, next) {
+router.post('/insertBook', function(req, res, next) {
   try {
     res.json(books.insert(req.body));
   } catch(err) {
@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
 });
 
 /* PUT books */
-router.put('/:id', function(req, res, next) {
+router.put('/updateBook/:id', function(req, res, next) {
   try {
     res.json(books.update(req.params.id, req.body));
   } catch(err) {
@@ -33,7 +33,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE books */
-router.delete('/:id', function(req, res, next) {
+router.delete('/deleteBook/:id', function(req, res, next) {
   try {
     res.json(books.delete(req.params.id));
   } catch(err) {
